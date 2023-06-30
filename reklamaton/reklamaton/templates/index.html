@@ -1,3 +1,4 @@
+{% load rest_framework %}
 {% load static %}
 {% load bootstrap4 %}
 {% bootstrap_css %}
@@ -11,22 +12,37 @@
   </head>
    <body class="body">
      <center><h2>Проверить телеграмм канал</h2></center>  
-     <form action="/url/to/submit/" method="post" class="form" style="margin-left:50px; margin-right:50px;">
+     <form action="/" method="post" class="form" style="margin-left:50px; margin-right:50px;">
        {% csrf_token %}
        <div class="form-group">
           <label for="channel">Телеграмм канал:</label>
-          <input type="text" class="form-control" placeholder="Введите телеграмм канал" id="channel">
+          <input type="text" class="form-control" placeholder="Введите телеграмм канал" id="channel" name="channel">
         </div>
        <div class="form-group">
-          <label for="channel">Продукт:</label>
-          <input type="text" class="form-control" placeholder="Введите продукт" id="channel">
+          <label for="message">Текст сообщения:</label>
+          <textarea type="text" class="form-control" placeholder="Введите продукт" id="message">
+          </textarea>
         </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="isAds">
+          <label class="form-check-label" for="isAds">
+             Только реклама
+          </label>
+       </div>
        {% buttons %}
        <button type="submit" class="btn btn-primary">
           Проверить
        </button>
        {% endbuttons %}
      </form>
-
+     {% if result %}
+       <div>
+          <center>
+          <h3>
+             Сообщение для канала подходит
+          </h3>
+          </center>
+       </div>
+     {% endif %}
    </body>
 </html>
